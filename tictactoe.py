@@ -1,47 +1,51 @@
 import time
-chart = [["    |      |  "], ["____|______|____"], ["    |      |  "], ["    |      |  "], ["____|______|____"], ["    |      |  "], ["    |      |  "]]
+
 
 def board_create():
-    for row in chart:
-        print(row[0])
+    chart = [
+    ["1       ","2       ","3"],
+    ["                       "],
+    ["                       "],
+    ["4       ","5       ","6"],
+    ["                       "],
+    ["                       "],
+    ["7       ","8       ","9"]
+]
+    print(chart[0])
+    print(chart[0])
+    print(chart[0])
+
+    
+
+    return chart
+
+def print_board(board):
+    for row in range(0,len(board),3):
+        print(board[row])
 
 def start():
     print("""
           WELCOME TO TIC TAC TOE""")
     time.sleep(1)
-    print("          Select Game Mode:")
-    print("          1. PLAYER VS PLAYER")
-    print("          2. PLAYER VS COMPUTER")
+
+def game_loop(board):
+    print("You are X and the enemy is O")
+    playdecision = int(input("Where would you like to place your piece:  "))
+    playdecision = str(playdecision)+"       "
+    for i in range(len(board)):
+        try:
+            col = board[i].index(playdecision)
+            row = i
+        except ValueError:
+            pass
     
-    while True:
-        choice = input("Enter 1 or 2: ")
-        if choice == "1":
-            print("You selected PLAYER VS PLAYER mode.")
-            return "PVP"
-        elif choice == "2":
-            print("You selected PLAYER VS COMPUTER mode.")
-            return "PVC"
-        else:
-            print("Invalid choice. Please enter 1 or 2.")
-
-def game_loop(mode):
-    if mode == "PVP":
-        print("Starting PLAYER VS PLAYER mode...")
-        pvp()
-    elif mode == "PVC":
-        print("Starting PLAYER VS COMPUTER mode...")
-        pvc()
-
-def pvp():
-    print("gyattgyattgyattgyattgyattgyatt")
-
-def pvc():
-    print("rizzrizzrizzrizzrizzrizzrizzrizz")
+    board[row][col] = "X"
 
 def game_main():
-    mode = start()
-    game_loop(mode)
+    start()
     time.sleep(1)
-    board_create()
+    board = board_create()
+    game_loop(board)
+    print(board)
 
 game_main()
