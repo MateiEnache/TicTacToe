@@ -3,20 +3,13 @@ import time
 
 def board_create():
     chart = [
-    ["1       ","2       ","3"],
-    ["                       "],
-    ["                       "],
-    ["4       ","5       ","6"],
-    ["                       "],
-    ["                       "],
-    ["7       ","8       ","9"]
+    ["1 ","2 ","3 "],
+    ["4 ","5 ","6 "],
+    ["7 ","8 ","9 "]
 ]
-    print(chart[0])
-    print(chart[0])
-    print(chart[0])
-
-    
-
+    print(*chart[0])
+    print(*chart[1])
+    print(*chart[2])
     return chart
 
 def print_board(board):
@@ -31,7 +24,7 @@ def start():
 def game_loop(board):
     print("You are X and the enemy is O")
     playdecision = int(input("Where would you like to place your piece:  "))
-    playdecision = str(playdecision)+"       "
+    playdecision = str(playdecision)+" "
     for i in range(len(board)):
         try:
             col = board[i].index(playdecision)
@@ -46,6 +39,6 @@ def game_main():
     time.sleep(1)
     board = board_create()
     game_loop(board)
-    print(board)
+    print(*board)
 
 game_main()
