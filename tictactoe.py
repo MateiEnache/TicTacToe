@@ -1,5 +1,5 @@
 import time
-
+import random
 
 def board_create():
     chart = [
@@ -13,8 +13,8 @@ def board_create():
     return chart
 
 def print_board(board):
-    for row in range(0,len(board),3):
-        print(board[row])
+    for row in board:
+        print(*row)
 
 def start():
     print("""
@@ -32,13 +32,37 @@ def game_loop(board):
         except ValueError:
             pass
     
-    board[row][col] = "X"
+    board[row][col] = "X "
 
 def game_main():
     start()
     time.sleep(1)
     board = board_create()
     game_loop(board)
-    print(*board)
+    print(*board[0])
+    print(*board[1])
+    print(*board[2])
+    comp_rand(board)
+    print("Computer is choosing")
+    time.sleep(1)
+    print("...")
+    time.sleep(1)
+    print(*board[0])
+    print(*board[1])
+    print(*board[2])
+    return board
 
+def comp_rand(board):
+    comp_choice1 = random.randint(0,2)
+    if board[comp_choice1] == "X" or "O":
+        comp_choice1 = random.randint(0,2)
+
+    for j in range(len(board)):
+        try:
+            col = board[j].index(comp_choice1)
+            row = j
+            board[row][col] = "O "
+        except ValueError:
+            pass
+    
 game_main()
