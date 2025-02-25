@@ -23,16 +23,24 @@ def start():
 
 def game_loop(board):
     print("You are X and the enemy is O")
-    playdecision = int(input("Where would you like to place your piece:  "))
-    playdecision = str(playdecision)+" "
-    for i in range(len(board)):
-        try:
-            col = board[i].index(playdecision)
-            row = i
-        except ValueError:
-            pass
-    
-    board[row][col] = "X "
+
+    while True:
+        # Player move
+        playdecision = input("Where would you like to place your piece? ") + " "
+        
+        for row in board:
+            if playdecision in row:
+                row[row.index(playdecision)] = "X "
+                break
+
+        print_board(board)
+
+        # Computer move
+        print("Computer is choosing...")
+        time.sleep(1)
+        comp_rand(board)
+        print_board(board)
+
 
 def game_main():
     start()
@@ -53,16 +61,13 @@ def game_main():
     return board
 
 def comp_rand(board):
-    comp_choice1 = random.randint(0,2)
-    if board[comp_choice1] == "X" or "O":
-        comp_choice1 = random.randint(0,2)
-
-    for j in range(len(board)):
-        try:
-            col = board[j].index(comp_choice1)
-            row = j
+    while True:
+        row = random.randint(0, 2)
+        col = random.randint(0, 2)
+        
+        if board[row][col] not in ["X ", "O "]:
             board[row][col] = "O "
-        except ValueError:
-            pass
+            break
+
     
 game_main()
